@@ -1,0 +1,43 @@
+// ----------------------------------------------------------------------
+//
+// ParticleDataTable.icc
+// Author: Lynn Garren, Walter Brown
+//
+// ----------------------------------------------------------------------
+
+namespace HepPDT {
+
+// default constructor
+inline ParticleDataTable::ParticleDataTable( std::string name, 
+                                             ProcessUnknownID* process )
+: itsTableName ( name ), itsProcessUnknownID( process )
+{ 
+    version(); 
+}
+
+inline ParticleDataTable::~ParticleDataTable()
+{ 
+  delete itsProcessUnknownID; 
+}
+
+inline ParticleData * ParticleDataTable::operator [] ( ParticleID key )
+{
+  return particle( key );
+}
+
+inline ParticleData const * ParticleDataTable::operator [] ( ParticleID key ) const
+{
+  return particle( key );
+}
+
+inline ParticleData * ParticleDataTable::operator [] ( std::string nkey )
+{
+  return particle( nkey );
+}
+
+inline ParticleData const * ParticleDataTable::operator [] ( std::string nkey ) const
+{
+  return particle( nkey );
+}
+
+}	// HepPDT

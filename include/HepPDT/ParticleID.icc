@@ -1,0 +1,46 @@
+// ----------------------------------------------------------------------
+//
+// ParticleID.icc
+//
+// ----------------------------------------------------------------------
+
+namespace HepPDT {
+
+
+inline ParticleID::ParticleID( int pid )
+: itsPID            ( pid )
+{ ; }
+
+inline ParticleID::ParticleID( const ParticleID & orig )
+: itsPID            ( orig.itsPID )
+{ ; }
+
+inline ParticleID& ParticleID::operator=( const ParticleID & rhs )
+{ 
+  ParticleID temp( rhs );
+  swap( temp );
+  return *this;
+}
+
+inline void ParticleID::swap( ParticleID & other ) 
+{
+  std::swap( itsPID, other.itsPID );
+}
+
+inline bool  ParticleID::operator <  ( ParticleID const & other ) const
+{
+  return itsPID < other.itsPID;
+}
+
+inline bool  ParticleID::operator == ( ParticleID const & other ) const
+{
+  return itsPID == other.itsPID;
+}
+
+inline int ParticleID::abspid( ) const
+{
+  /// return a value greater than or equal to zero
+  return (itsPID < 0) ? -itsPID : itsPID;
+}
+
+} // HepPDT

@@ -1,0 +1,62 @@
+// ----------------------------------------------------------------------
+//
+// ParticleData.icc
+// Author: Lynn Garren
+//
+// ----------------------------------------------------------------------
+
+#include <algorithm>	// swap()
+
+namespace HepPDT {
+
+ParticleData::ParticleData( const CPDID & cpdid, const DDID & ddid  )
+: itsCPDID ( cpdid ),
+  itsDDID  ( ddid )
+{ ; }
+
+ParticleData::~ParticleData()
+{ ; }
+
+void  ParticleData::swap( ParticleData & other )
+{
+  std::swap(itsCPDID, other.itsCPDID);
+  std::swap(itsDDID,  other.itsDDID);
+}
+
+ParticleData::ParticleData( const ParticleData & orig )
+: itsCPDID ( orig.itsCPDID ),
+  itsDDID  ( orig.itsDDID )
+{ ; }
+
+ParticleData & ParticleData::operator = ( const ParticleData & rhs )
+{ 
+  ParticleData temp( rhs );
+  swap( temp );
+  return *this;
+}
+
+inline bool ParticleData::isStable() const
+{
+    if( totalWidth().value() == -1. ) return false;
+    if( totalWidth().value() > 0 || lifetime().value() > 0 ) return false;
+    return true;
+}
+
+void ParticleData::write( std::ostream & os ) const
+{
+  itsCPDID->write( os );
+  itsDDID->write( os );
+}
+
+void ParticleData::writeParticleInfo( std::ostream & os ) const
+{
+  itsCPDID->write( os );
+}
+
+void ParticleData::writeParticleTranslation( std::ostream & os ) const
+{
+  itsCPDID->writeTranslation( os );
+}
+
+
+}	// HepPDT

@@ -1,0 +1,39 @@
+// ----------------------------------------------------------------------
+//
+// DecayChannel.icc
+//
+// ----------------------------------------------------------------------
+
+#include <algorithm>	// swap()
+
+namespace HepPDT {
+
+DecayChannel::DecayChannel( const DecayChannel & orig )
+: itsDecayName            ( orig.itsDecayName ),
+  itsBranchingFraction    ( orig.itsBranchingFraction ),
+  itsDecayChannelProducts ( orig.itsDecayChannelProducts ),
+  itsDecayModelParameters ( orig.itsDecayModelParameters )
+{ ; }
+
+DecayChannel & DecayChannel::operator=( const DecayChannel & rhs )
+{ 
+  if( this != & rhs )
+  {
+      itsDecayName            = rhs.itsDecayName;
+      itsBranchingFraction    = rhs.itsBranchingFraction;
+      itsDecayChannelProducts = rhs.itsDecayChannelProducts;
+      itsDecayModelParameters = rhs.itsDecayModelParameters;
+  }
+  return *this;
+}
+
+void DecayChannel::swap( DecayChannel & other )
+{ 
+    std::swap( itsDecayName            , other.itsDecayName );
+    std::swap( itsBranchingFraction    , other.itsBranchingFraction );
+    std::swap( itsDecayChannelProducts , other.itsDecayChannelProducts );
+    std::swap( itsDecayModelParameters , other.itsDecayModelParameters );
+     
+}
+
+} // HepPDT

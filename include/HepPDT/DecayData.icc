@@ -1,0 +1,38 @@
+// ----------------------------------------------------------------------
+//
+// DecayData.icc
+//
+// ----------------------------------------------------------------------
+
+namespace HepPDT {
+
+DecayData::DecayData( )
+: itsDecayList    ( 0 )
+{ ; }
+
+DecayData::DecayData( std::vector<DecayChannel > const & dv )
+: itsDecayList    ( dv )
+{ ; }
+
+DecayData::~DecayData()
+{ ; }
+
+DecayData::DecayData( DecayData const & orig )
+: itsDecayList    ( orig.itsDecayList )
+{ ; }
+
+DecayData & DecayData::operator = ( DecayData const & rhs )
+{ 
+  if( this != & rhs )
+  {
+      itsDecayList    = rhs.itsDecayList;
+  }
+  return *this;
+}
+
+void DecayData::swap( DecayData & other )
+{
+   std::swap( itsDecayList, other.itsDecayList );
+}
+
+} // HepPDT
